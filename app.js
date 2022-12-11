@@ -21,6 +21,15 @@ mongoose.connect(process.env.DATABASE_URL, {})
     console.log('Cannot Connect')
 })
 
+//configure Cross-Origin-Resource-Sharing to give permission to angular client only
+//Done before controller reference
+const cors = require('cors')
+
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    methods: 'GET,POST,PUT,DELETE,HEAD,OPTIONS'
+}))
+
 //map url path to controller
 const employers = require('./controllers/employers')
 app.use('/api/employers', employers)
