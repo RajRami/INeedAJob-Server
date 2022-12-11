@@ -14,4 +14,16 @@ router.get('/', (req, res) => {
     }).sort('name')
 })
 
+// POST: /api/employers => save new employer from request body
+router.post('/', (req, res) => {
+    Employer.create(req.body, (err, newEmployer) => {
+        if (err) {
+            return res.json(err).status(400)
+        }
+        else {
+            return res.json(newEmployer).status(201)
+        }
+    })
+})
+
 module.exports = router
