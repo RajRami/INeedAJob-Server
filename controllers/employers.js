@@ -26,4 +26,28 @@ router.post('/', (req, res) => {
     })
 })
 
+//DELETE: /api/employers/abc123 => delete the selected employer
+router.delete('/:_id', (req, res) => {
+    Employer.findOneAndDelete({ _id: req.params._id}, (err, deleteResponse) => {
+        if(err){
+            return res.json(err).status(400)
+        }
+        else{
+            return res.json(deleteResponse).status(200)
+        }
+    })
+})
+
+//PUT: /api/employers/abc123 => update the selected employer
+router.put('/:_id', (req, res) => {
+    Employer.findOneAndUpdate({ _id: req.params._id}, req.body, (err, employer) => {
+        if(err){
+            return res.json(err).status(400)
+        }
+        else{
+            return res.json(employer).status(202)
+        }
+    })
+})
+
 module.exports = router
